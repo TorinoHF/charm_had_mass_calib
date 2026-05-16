@@ -1,0 +1,47 @@
+PreprocessOutDir: '/data/shared/CharmHadMassCalib/preprocess'
+
+CharmHadrons:
+
+-   Name: 'Ds'
+    Inputs:
+        '2023':
+            '0_20': '/data/shared/CharmHadMassCalib/2023/020/Train679091/AnalysisResultsHF_LHC23_PbPb_pass4_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2023/2050/Train679306/AnalysisResultsHF_LHC23_PbPb_pass4_medium_2P3PDstar_2050.root'
+        '2024':
+            '0_20': '/data/shared/CharmHadMassCalib/2024/020/Train678887/AnalysisResultsHF_LHC24_PbPb_pass3_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2024/2050/Train678520/AnalysisResultsHF_LHC24_PbPb_pass3_medium_2P3PDstar_2050.root'
+        '2025':
+            '0_20': '/data/shared/CharmHadMassCalib/2025/020/Train678296/AnalysisResultsHF_LHC25_PbPb_pass1_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2025/2050/Train678921/AnalysisResultsHF_LHC25_PbPb_pass1_medium_2P3PDstar_2050.root'
+    Selections:
+    -   Centrality: '20_50'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
+
+-   Name: 'Dplus'
+    Inputs:
+        '2023':
+            '0_20': '/data/shared/CharmHadMassCalib/2023/020/Train679091/run_544091' # '/data/shared/CharmHadMassCalib/2023/020/Train679091/AnalysisResultsHF_LHC23_PbPb_pass4_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2023/2050/Train679306/AnalysisResultsHF_LHC23_PbPb_pass4_medium_2P3PDstar_2050.root'
+        '2024':
+            '0_20': '/data/shared/CharmHadMassCalib/2024/020/Train678887/AnalysisResultsHF_LHC24_PbPb_pass3_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2024/2050/Train678520/AnalysisResultsHF_LHC24_PbPb_pass3_medium_2P3PDstar_2050.root'
+        '2025':
+            '0_20': '/data/shared/CharmHadMassCalib/2025/020/Train678296/AnalysisResultsHF_LHC25_PbPb_pass1_medium_2P3PDstar_020.root'
+            '20_50': '/data/shared/CharmHadMassCalib/2025/2050/Train678921/AnalysisResultsHF_LHC25_PbPb_pass1_medium_2P3PDstar_2050.root'
+    Selections:
+    -   Centrality: '0_10'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
+    -   Centrality: '10_20'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
+    -   Centrality: '20_30'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
+    -   Centrality: '30_40'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
+    -   Centrality: '40_50'
+        Occupancy: [0, 140000]
+        PtIntervals: [1, 2, 3, 4]
