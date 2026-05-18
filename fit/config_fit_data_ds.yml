@@ -1,0 +1,100 @@
+inputs:
+  # Root directory containing per-centrality, per-year MassDistributions.root files,
+  # e.g. <data_dir>/cent_0_20/2024/MassDistributions.root.
+  data_dir: "/home/fchinu/Run3/charm_had_mass_calib/data/Ds"
+
+max_workers: 10
+
+zfit_cpus:
+  intra: 20
+  inter: 20
+
+fit_configs:
+  # below one per pT bin
+  mass:
+    mins: [1.77, 1.77, 1.77, 1.77, 1.77, 1.77]
+    maxs: [2.1, 2.1, 2.1, 2.15, 2.15, 2.15]
+  rebin: [4, 4, 4, 4, 4, 4]
+  signal:
+    signal_funcs: [["doublecbsymm", "doublecbsymm"], ["doublecbsymm", "doublecbsymm"], ["doublecbsymm", "doublecbsymm"],
+      ["doublecbsymm", "doublecbsymm"], ["doublecbsymm", "doublecbsymm"], ["doublecbsymm", "doublecbsymm"]]
+    par_init_limit:
+      - sigma:
+          init: [0.005, 0.01, 0.01, 0.02, 0.02, 0.02]
+          min: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+          max: [0.013, 0.013, 0.02, 0.03, 0.04, 0.04]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+        alpha:
+          init: [1.40, 1.22, 1.39, 1.62, 1.59, 1.43]
+          min: [0., 0., 0., 0., 0.5, 0.75]
+          max: [5., 5., 5., 5., 5., 5.]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+        n:
+          init: [23.75, 39.00, 5.67, 3.00, 3.07, 3.08]
+          min: [3, 3, 3, 3, 3, 3]
+          max: [100., 100., 100., 100., 100., 100.]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+      - sigma:
+          init: [0.005, 0.01, 0.015, 0.02, 0.02, 0.02]
+          min: [0.001, 0.001, 0.001, 0.001, 0.001, 0.001]
+          max: [0.013, 0.013, 0.025, 0.03, 0.04, 0.04]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+        alpha:
+          init: [1.48, 1.39, 1.38, 1.34, 1.37, 1.27]
+          min: [0., 0., 0., 0., 0.5, 0.75]
+          max: [5., 5., 5., 5., 5., 5.]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+        n:
+          init: [87.14, 7.17, 6.41, 9.38, 17.03, 19.76]
+          min: [3, 3, 3, 3, 3, 3]
+          max: [100., 100., 100., 100., 100., 100.]
+          fix_to_config_value: [false, false, false, false, false, false]
+          fix_to_file: [false, false, false, false, false, false]
+          fix_to_mb: [true, true, true, true, true, true]
+
+    file_for_params_fix: /home/fchinu/Run3/Ds_Dp_ratio_PbPb/Projections_RawYields/MC/doublecb/RawYields/mass_fits.root # path to root file. If null, no file is used
+    suffix_hist_for_params_fix: "_0_100" # "" for no centrality selection, can also use cent_min, cent_max to format name
+    fix_sigma_dplus_to_ds: [true, true, true, true, true, true]
+    ratio_sigma_dplus_to_ds: [0.85, 0.85, 0.85, 0.85, 0.85, 0.85] # value, list or path to root_file. If null or empty, set dplus sigma to that of ds. Otherwise, set to ds sigma * value
+  bkg:
+    bkg_funcs: [['chebpol2'], ['chebpol2'], ['chebpol2'], ['chebpol2'], ['chebpol2'], ['chebpol2']]
+    use_bkg_templ: [false, false, false, false, false, false]
+    templ_norm:
+      fix_to_file: [false, false, false]
+      fix_to_mb: [false, false, false]
+      fix_with_br: [true, true, true]
+      file_name_for_fix: null
+      hist_name_for_fix: h_corr_bkg_over_dplus_signal_0_100
+      backgrounds:
+      - name: $\mathrm{D^{+}}\rightarrow K^{-}\pi^{+}\pi^{+}$
+        file_norm: /home/fchinu/Run3/Ds_Dp_ratio_PbPb/Projections_RawYields/MC/doublecb/Projections/w_bdt/dplus_bkg.root
+        norm_hist_name: 'h_mass_{pt_min}_{pt_max}_cent_0_100'
+        template_file: /home/fchinu/Run3/Ds_Dp_ratio_PbPb/Projections_RawYields/MC/doublecb/Projections/wo_bdt/dplus_corr_bkg_template.root
+        template_hist_name: 'h_mass_{pt_min}_{pt_max}'
+        br:
+          pdg: 0.0938
+          simulations: 0.4853
+      signal:
+        file_norm: /home/fchinu/Run3/Ds_Dp_ratio_PbPb/Projections_RawYields/MC/doublecb/Projections/w_bdt/dplus.root
+        hist_name: 'h_mass_{pt_min}_{pt_max}_cent_0_100'
+        br:
+          pdg: 0.00269
+          simulations: 0.4263
+
+
+output:
+  # Per (cent, year) outputs land in <directory>/<cent_X_Y>_<YEAR>/.
+  directory: "/home/fchinu/Run3/charm_had_mass_calib/fit/output/Ds"
+  suffix: ""
+  save_all_fits: true
+  formats: ["png", "pdf", "root"]
